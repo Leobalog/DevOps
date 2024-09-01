@@ -31,6 +31,16 @@ jobs:
           registry: judevops.azurecr.io
           username: ${{ secrets.REPOSITORY_USERNAME }}
           password: ${{ secrets.LOGIN_CONTAINER_REGISTRY }}
+          
+      - name: Build Docker image
+        run: |
+          docker build -t judevops.azurecr.io/leo_balog-calculator:latest .
+          
+      - name: Push Docker image
+        run: |
+          docker push judevops.azurecr.io/leo_balog-calculator:latest
+          
+
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
