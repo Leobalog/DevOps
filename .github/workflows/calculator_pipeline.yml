@@ -34,8 +34,8 @@ jobs:
           
       - name: Build Docker image
         run: |
-          docker build -t judevops.azurecr.io/leo_balog-calculator:latest .
+          docker build -t judevops.azurecr.io/leo_balog-calculator:latest ./BE
           
       - name: Push Docker image
         run: |
-          docker push judevops.azurecr.io/leo_balog-calculator:latest 
+          docker push judevops.azurecr.io/leo_balog-calculator:latest ./BE
