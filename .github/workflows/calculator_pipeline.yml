@@ -38,4 +38,4 @@ jobs:
           
       - name: Push Docker image
         run: |
-          docker push judevops.azurecr.io/leo_balog-calculator:latest ./BE
+          docker push judevops.azurecr.io/leo_balog-calculator:latest
