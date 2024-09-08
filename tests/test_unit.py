@@ -1,4 +1,6 @@
 from BE.BE.calculator_helper import CalculatorHelper
+import pytest
+
 
 class Testcalculator():
     def test_add(self):
@@ -32,6 +34,14 @@ class Testcalculator():
         value = calculator.multiply(1,1)
         # Assert
         assert value == 1
+    
+    def setup_method(self, method):
+        self.calculator = CalculatorHelper()
+
+
+    def teardown_method(self, method):
+        del self.calculator
+    
 
     def test_divide(self):
         # Arrange
@@ -40,3 +50,12 @@ class Testcalculator():
         value = calculator.divide(1,1)
         # Assert
         assert value == 1
+
+    def test_division_by_zero(self):
+        # Arrange
+        calculator = CalculatorHelper()
+        # Action
+        with pytest.raises(ZeroDivisionError) as exinfo:
+            value = calculator.divide(4,0)
+        # Assert
+        assert "division by zero" in str(exinfo.value), "Expected exception"
