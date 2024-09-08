@@ -39,7 +39,24 @@ jobs:
         run: |
           cd BE
           python calculator.py --rest &
+      # Run tests with pytest and generate JUnit XML report
+      - name: Run tests
+        run: |
+          pytest --junit-xml=report.xml
 
+      # Upload test report to GitHub
+      - name: Upload test report
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report
+          path: report.xml
+
+      # Use JUnit report action to visualize the test results
+      - name: JUnit Report Action
+        uses: github/junit-report-action@v1
+        with:
+          files: report.xml
+          
       - name: Login to Azure Container Registry
         uses: docker/login-action@v2
         with:
