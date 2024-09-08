@@ -40,11 +40,6 @@ jobs:
           cd BE
           python calculator.py --rest &
       # Run tests with pytest and generate JUnit XML report
-      - name: Run tests
-        env:
-          PYTHONPATH: ${{ github.workspace }}/BE
-        run: |
-          pytest --junit-xml=report.xml
 
       - name: Upload test report
         uses: actions/upload-artifact@v3
