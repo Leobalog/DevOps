@@ -39,6 +39,8 @@ jobs:
         run: |
           cd BE
           python calculator.py --rest &
+      - name: Set up PYTHONPATH
+        run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
 
       - name: Run tests
         env:
