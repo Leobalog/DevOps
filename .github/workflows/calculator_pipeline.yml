@@ -24,7 +24,29 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
+    # Install Python and Python packages
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'  # Set the Python version you are using
 
+      - name: Install dependencies
+        run: |
+          pip install -r BE/requirements.txt
+
+      # Start the REST API
+      - name: Start REST API
+        run: |
+          cd BE
+          python calculator.py --rest &
+      # Run tests with pytest and generate JUnit XML report
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-report
+          path: report.xml
+          
       - name: Login to Azure Container Registry
         uses: docker/login-action@v2
         with:
