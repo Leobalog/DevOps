@@ -42,7 +42,7 @@ jobs:
 
       - name: Run tests
         env:
-          PYTHONPATH: ${{ github.workspace }}/BE
+          PYTHONPATH: ${{ github.workspace }}/BE/BE
         run: |
           pytest --junit-xml=report.xml
 
