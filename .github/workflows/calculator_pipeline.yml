@@ -56,14 +56,14 @@ jobs:
           include_passed: true
 
       - name: Upload test report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-report
           path: report.xml
 
           
       - name: Login to Azure Container Registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v4
         with:
           registry: judevops.azurecr.io
           username: ${{ secrets.REPOSITORY_USERNAME }}
