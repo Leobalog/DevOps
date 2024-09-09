@@ -52,14 +52,14 @@ jobs:
         uses: mikepenz/action-junit-report@v4.3.1
         if: success() || failure() # always run even if the previous step fails
         with:
-          report_paths: '**/BE/tests/TEST-*.xml'
+          report_paths: '**/BE/tests/reports/TEST-*.xml'
           include_passed: true
 
       - name: Upload test report
         uses: actions/upload-artifact@v3
         with:
           name: test-report
-          path: report.xml
+          path: '**/BE/tests/reports/TEST-*.xml'
 
           
       - name: Login to Azure Container Registry
