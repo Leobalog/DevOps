@@ -55,7 +55,6 @@ jobs:
         with:
           report_paths: /home/runner/work/DevOps/DevOps/report.xml
           include_passed: true
-          detailed_summary: true
 
       - name: Upload test report
         uses: actions/upload-artifact@v3
