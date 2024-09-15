@@ -10,4 +10,4 @@ class TestWeb(WebBase):
         Registerpage(self.driver).elements.password1.set('')
         Registerpage(self.driver).elements.password2.set('')
         Registerpage(self.driver).elements.register.click()
-        
+        assert Registerpage(self.driver).elements.username_logged_in.text == 'admin'

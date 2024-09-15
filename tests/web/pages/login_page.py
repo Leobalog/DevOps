@@ -22,8 +22,11 @@ class Registerpage(PageBase):
 
         self.page_elements = {
             'username': Element('//input[@id="username"]', self),
-            'password': Element('//input[@id="password"]', self),
+            'password1': Element('//input[@id="password1"]', self),
+            'password2': Element('//input[@id="password2"]', self),
             'register': Element('//button[@id="register"]', self),
+            'username_logged_in': Element('//label[@id="user-name"]', self),
+
         }
 
         self.elements = munchify(self.page_elements)
