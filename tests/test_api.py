@@ -1,73 +1,49 @@
-import requests
-from calculator_client.client import Client
-from calculator_client.api.actions import calculate
-from calculator_client.models.calculation import Calculation
-from calculator_client.models.opertions import Opertions
-from calculator_client.models import ResultResponse
+from tests.base_test_api import BaseTestCalculatorAPI
+from tests.calculator_client.models import ResultResponse
+import pytest
+
+test_add_values = [ (3, 3, 6), (3, -3, 0)]
+test_sub_values = [ (6, 4, 2), (3, -3, 6)]
+test_mul_values = [ (6, 2, 12), (-3, -3, 9)]
+test_div_values = [ (6, 2, 3), (6, -2, -3)]
 
 
-class TestCalculatorAPI():
-    def test_calculate_add(self):
-        url = "http://localhost:5000/calculate"
+class TestCalculatorAPI(BaseTestCalculatorAPI):
 
-        payload = {
-            "operation": "add" ,
-            "operand1": 1,
-            "operand2": 1
-        }
-        response = requests.post(url, json=payload)
 
-    def test_generated_code_add(self):
-        client = Client(base_url="http://localhost:5000")
-        response = calculate.sync(client = client, body = Calculation(Opertions.ADD, operand1=1,operand2=1))
+    @pytest.mark.parametrize("a, b, expected", test_add_values) 
+    def test_add_api(self, a, b, expected):
+        
+        response = self.do_calculation("add", a , b)
+        value = response.result
+
         assert isinstance(response, ResultResponse)
-        assert response.result == 2
+        assert  value == expected
 
-    def test_calculate_subtract(self):
-        url = "http://localhost:5000/calculate"
 
-        payload = {
-            "operation": "subtract" ,
-            "operand1": 1,
-            "operand2": 1
-        }
-        response = requests.post(url, json=payload)
+    @pytest.mark.parametrize("a, b, expected", test_sub_values) 
+    def test_subtract_api(self, a, b, expected):
+        
+        response = self.do_calculation("subtract", a , b)
+        value = response.result
 
-    def test_generated_code_subtract(self):
-        client = Client(base_url="http://localhost:5000")
-        response = calculate.sync(client = client, body = Calculation(Opertions.SUBTRACT, operand1=1,operand2=1))
         assert isinstance(response, ResultResponse)
-        assert response.result == 0
+        assert  value == expected
 
-    def test_calculate_divide(self):
-        url = "http://localhost:5000/calculate"
+    @pytest.mark.parametrize("a, b, expected", test_mul_values) 
+    def test_mul_api(self, a, b, expected):
+        
+        response = self.do_calculation("multiply", a , b)
+        value = response.result
 
-        payload = {
-            "operation": "divide" ,
-            "operand1": 1,
-            "operand2": 1
-        }
-        response = requests.post(url, json=payload)
-
-    def test_generated_code_divide(self):
-        client = Client(base_url="http://localhost:5000")
-        response = calculate.sync(client = client, body = Calculation(Opertions.DIVIDE, operand1=1,operand2=1))
         assert isinstance(response, ResultResponse)
-        assert response.result == 1
+        assert  value == expected
 
-    def test_calculate_multiply(self):
-        url = "http://localhost:5000/calculate"
+    @pytest.mark.parametrize("a, b, expected", test_div_values) 
+    def test_divide_api(self, a, b, expected):
+        
+        response = self.do_calculation("divide", a , b)
+        value = response.result
 
-        payload = {
-            "operation": "multiply" ,
-            "operand1": 1,
-            "operand2": 1
-        }
-        response = requests.post(url, json=payload)
-
-    def test_generated_code_multiply(self):
-        client = Client(base_url="http://localhost:5000")
-        response = calculate.sync(client = client, body = Calculation(Opertions.MULTIPLY, operand1=1,operand2=1))
         assert isinstance(response, ResultResponse)
-        assert response.result == 1
-
+        assert  value == expected
