@@ -82,3 +82,24 @@ class Testcalculator(WebBase):
 
         a = 6
 
+class Testhistory(WebBase):
+    def test_history(self):
+        LoginPage(self.driver).elements.username.set('admin')
+        LoginPage(self.driver).elements.password.set('test1234')
+        LoginPage(self.driver).elements.login.click()
+
+        CalculatePage(self.driver).elements.key1.click()
+        CalculatePage(self.driver).elements.keyadd.click()
+        CalculatePage(self.driver).elements.key2.click()
+        CalculatePage(self.driver).elements.keyequals.click()
+
+        CalculatePage(self.driver).elements.key5.click()
+        CalculatePage(self.driver).elements.keysubtract.click()
+        CalculatePage(self.driver).elements.key2.click()
+        CalculatePage(self.driver).elements.keyequals.click()
+
+        CalculatePage(self.driver).elements.historybutton.click()        
+
+        assert_that(CalculatePage(self.driver).elements.historypanel.value).is_equal_to('1+2=3\n5-2=3\n')
+
+        a = 7
