@@ -19,6 +19,8 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -39,6 +41,7 @@ jobs:
         run: |
           cd BE
           python calculator.py --rest &
+          
       - name: Set up PYTHONPATH
         run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
 
@@ -50,13 +53,14 @@ jobs:
         uses: mikepenz/action-junit-report@v4.3.1
         if: success() || failure() # always run even if the previous step fails
         with:
-          report_paths: '**/build/test-results/test/TEST-*.xml'
+          report_paths: /home/runner/work/DevOps/DevOps/report.xml
+          include_passed: true
 
       - name: Upload test report
         uses: actions/upload-artifact@v3
         with:
           name: test-report
-          path: report.xml
+          path: /home/runner/work/DevOps/DevOps/report.xml
 
           
       - name: Login to Azure Container Registry
