@@ -5,6 +5,9 @@ from tests.web.pages.login_page import LoginPage
 from tests.web.pages.login_page import RegisterPage
 from tests.web.pages.calculate_page import CalculatePage
 from assertpy import assert_that
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class TestWeb(WebBase):
@@ -24,7 +27,13 @@ class TestReg(WebBase):
         RegisterPage(self.driver).elements.password1.set('test1234')
         RegisterPage(self.driver).elements.password2.set('test1234')
         RegisterPage(self.driver).elements.register.click()
+        #assert_that(RegisterPage(self.driver).elements.username_registered.text).is_equal_to('User already exists!')
         #assert_that(RegisterPage(self.driver).elements.username_logged_in.text).is_equal_to(unique_username)
+        error_msg_element = WebDriverWait(self.driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, "//div[@id='errormsg']"))
+       )
+        actual_text = error_msg_element.text
+        assert_that(actual_text).is_equal_to('User already exists!')
         a = 2
 
 class Testcalculator(WebBase):
