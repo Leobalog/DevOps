@@ -37,10 +37,10 @@ jobs:
           pip install -r BE/requirements.txt
 
       # Start the REST API
-      - name: Start REST API
-        run: |
-          cd BE
-          python calculator.py --rest &
+      #- name: Start REST API
+      #  run: |
+      #   cd BE
+      #    python calculator.py --rest &
           
       - name: Start Selenium container
         run: |
