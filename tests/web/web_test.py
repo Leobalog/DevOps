@@ -16,17 +16,17 @@ class TestWeb(WebBase):
         assert_that(LoginPage(self.driver).elements.username_logged_in.text).is_equal_to('admin')
         a = 1
 
-class TestReg(WebBase):
+#class TestReg(WebBase):
     
-    def test_register(self):
-        RegisterPage(self.driver).elements.register.click()
-        RegisterPage(self.driver).elements.username.set('testing')
-        RegisterPage(self.driver).elements.password1.set('test1234')
-        RegisterPage(self.driver).elements.password2.set('test1234')
-        RegisterPage(self.driver).elements.register.click()
-        assert_that(RegisterPage(self.driver).elements.username_registered.text).is_equal_to('User already exists!')
+    #def test_register(self):
+    #    RegisterPage(self.driver).elements.register.click()
+    #    RegisterPage(self.driver).elements.username.set('testing')
+    #    RegisterPage(self.driver).elements.password1.set('test1234')
+    #    RegisterPage(self.driver).elements.password2.set('test1234')
+    #    RegisterPage(self.driver).elements.register.click()
+    #    assert_that(RegisterPage(self.driver).elements.username_registered.text).is_equal_to('User already exists!')
         #assert_that(RegisterPage(self.driver).elements.username_logged_in.text).is_equal_to(unique_username)
-        a = 2
+    #    a = 2
 
 class Testcalculator(WebBase):
     def test_add(self):
@@ -54,6 +54,20 @@ class Testcalculator(WebBase):
 
         a = 4
 
+class TestReg(WebBase):
+    
+    def test_register(self):
+        RegisterPage(self.driver).elements.register.click()
+        RegisterPage(self.driver).elements.username.set('albin')
+        RegisterPage(self.driver).elements.password1.set('test1234')
+        RegisterPage(self.driver).elements.password2.set('test1234')
+        RegisterPage(self.driver).elements.register.click()
+
+        sleep(5)
+        
+        assert_that(RegisterPage(self.driver).elements.username_logged_in.text).is_equal_to('albin')
+
+        a = 9
 
 class Testcalculator(WebBase):
     def test_multiply(self):
@@ -103,3 +117,4 @@ class Testhistory(WebBase):
         assert_that(CalculatePage(self.driver).elements.historypanel.value).is_equal_to('1+2=3\n5-2=3\n')
 
         a = 7
+
