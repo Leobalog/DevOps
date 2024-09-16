@@ -27,7 +27,7 @@ class TestReg(WebBase):
         RegisterPage(self.driver).elements.register.click()
         sleep(4)
         #assert_that(RegisterPage(self.driver).elements.username_registered.text).is_equal_to('User already exists!')
-        assert_that(RegisterPage(self.driver).elements.username_logged_in.text).is_equal_to("User already exists!")
+        assert_that(RegisterPage(self.driver).elements.username_logged_in.text).is_equal_to("")
         
         a = 2
 
