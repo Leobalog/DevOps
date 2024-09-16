@@ -26,7 +26,7 @@ class TestWeb(WebBase):
     #    RegisterPage(self.driver).elements.register.click()
     #    assert_that(RegisterPage(self.driver).elements.username_registered.text).is_equal_to('User already exists!')
         #assert_that(RegisterPage(self.driver).elements.username_logged_in.text).is_equal_to(unique_username)
-    #    a = 2
+        a = 2
 
 class Testcalculator(WebBase):
     def test_add(self):
@@ -65,9 +65,7 @@ class TestReg(WebBase):
 
         sleep(5)
         
-        assert_that(RegisterPage(self.driver).elements.username_logged_in.text).is_equal_to('albin')
-
-        a = 9
+        assert_that(RegisterPage(self.driver).elements.username_registered.text).is_equal_to('User already exists!')
 
 class Testcalculator(WebBase):
     def test_multiply(self):
@@ -117,4 +115,3 @@ class Testhistory(WebBase):
         assert_that(CalculatePage(self.driver).elements.historypanel.value).is_equal_to('1+2=3\n5-2=3\n')
 
         a = 7
-
